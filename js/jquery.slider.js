@@ -675,7 +675,19 @@
 	};
 	
 	jSliderPointer.prototype.limits = function( x ){
-	  return this.parent.limits( x, this );
+	  if(this.parent.settings.min){
+      var minPrc = this.parent.settings.min / this.parent.settings.interval * 100;
+      if(x <= minPrc){
+        x = minPrc;
+      }
+    }
+    if(this.parent.settings.max){
+      var maxPrc = this.parent.settings.max / this.parent.settings.interval * 100 ;
+      if(x >= maxPrc){
+        x = maxPrc;
+      }
+    }
+    return this.parent.limits( x, this );
 	};
 	
 	jSliderPointer.prototype.calc = function(coords){
